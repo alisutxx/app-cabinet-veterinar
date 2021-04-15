@@ -1,0 +1,41 @@
+﻿@using Aplicatie_web_cabinet_veterinar.Models.ApplicationModels;
+
+@model Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.AppointmentModel
+<h2>Programare</h2>
+
+
+<div>
+	Data : @Model.Date
+</div>
+<div>
+	Pret estimativ: @Model.EstimativePrice
+</div>
+<div>
+@if (Model.Price == null || Model.Price == 0)
+{
+	<span>Pretul final nu este calculat inca.</span>
+}
+else
+{
+	<span>Pret final: @Model.Price</span>
+}
+</div>
+<div>
+	Nume medic: @Model.MedicName
+</div>
+<div>
+	Nume animal de companie: @Model.PetName
+</div>
+@if (ApplicationHelper.IsAdminOrAngajat)
+{
+	<div>
+		Email client: @Model.ClientEmail
+	</div>
+	<div>
+		Dropdown cu serviciile pentru adaugare.
+		<br />
+		Editeaza programarea
+		<br />
+		Sterge programarea
+	</div>
+}

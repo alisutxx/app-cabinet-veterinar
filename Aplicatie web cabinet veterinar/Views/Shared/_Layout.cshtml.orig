@@ -1,0 +1,96 @@
+﻿@using Aplicatie_web_cabinet_veterinar.Models.ApplicationModels
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Cabinet veterinar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+			<div class="navbar-collapse collapse">
+				@if ((Session["loggedUser"] as LoggedUser) == null)
+				{
+					<ul class="nav navbar-nav">
+
+						<li>@Html.ActionLink("Acasa", "Index", "Home")</li>
+						<li>@Html.ActionLink("Despre", "About", "Home")</li>
+						<li>@Html.ActionLink("Servicii", "Index", "Service")</li>
+						<li>@Html.ActionLink("Echipa medicala", "ShowMedics", "User")</li>
+						<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>@Html.ActionLink("Inregistrare", "SignUp", "User")</li>
+						<li>@Html.ActionLink("Autentificare", "Authenticate", "User")</li>
+					</ul>
+				}
+				else if (CommonStuff.IsUtilizator((Session["loggedUser"] as LoggedUser).RoleId))
+				{
+					<ul class="nav navbar-nav">
+
+						<li>@Html.ActionLink("Acasa", "Index", "Home")</li>
+						<li>@Html.ActionLink("Despre", "About", "Home")</li>
+						<li>@Html.ActionLink("Servicii", "Index", "Service")</li>
+						<li>@Html.ActionLink("Echipa medicala", "ShowMedics", "User")</li>
+						<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
+						<li class="dropdown">
+							<button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Contul meu
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<div>@Html.ActionLink("Profil", "ShowProfile", "User")</div>
+								<div>@Html.ActionLink("Animale de companie", "Index", "Pet")</div>
+								<div>@Html.ActionLink("Programarile mele", "Index", "Appointment")</div>
+								
+							</div>
+						</li>
+=======
+						<li>@Html.ActionLink("Profil", "ShowProfile", "User")</li>
+						<li>@Html.ActionLink("Programarile mele", "Index", "Appointment")</li>
+>>>>>>> 9560d6f0cd5f825c6eda0997a20f26f42879861d
+						<li>@Html.ActionLink("Deconectare", "LogOut", "User")</li>
+					</ul>
+
+
+				}
+				else if (CommonStuff.IsAngajat((Session["loggedUser"] as LoggedUser).RoleId))
+				{
+					<ul class="nav navbar-nav">
+						<li>@Html.ActionLink("Programari", "Index", "Appointment")</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>@Html.ActionLink("Profil", "ShowProfile", "User")</li>
+						<li>@Html.ActionLink("Deconectare", "LogOut", "User")</li>
+					</ul>
+				}
+			</div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

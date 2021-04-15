@@ -1,0 +1,49 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ViewModels.ServiceViewModel
+
+<h2>
+	@if (Model.Service.Id == 0)
+	{<span>Adaugare</span>}
+	else
+	{ <span>Editare</span>} serviciu pentru programari
+</h2>
+
+@using (Html.BeginForm("Save", "Service"))
+{
+	<div class="form-group">
+		@Html.LabelFor(m => m.Service.Name)
+		@Html.TextBoxFor(m => m.Service.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Service.Name)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Service.Description)
+		@Html.TextBoxFor(m => m.Service.Description, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Service.Description)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Service.Price)
+		@Html.TextBoxFor(m => m.Service.Price, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Service.Price)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Service.CategoryId)
+		@Html.DropDownListFor(m => m.Service.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Alege categoria", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Service.CategoryId)
+	</div>
+
+	@Html.HiddenFor(m => m.Service.Id)
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-primary">Salvare</button>
+
+	if (Model.Service.Id == 0)
+	{
+		<span>@Html.ActionLink("Renuntare", "Index", "Service", null, new { @class = "btn btn-danger" });</span>
+	}
+	else
+	{
+		<span>@Html.ActionLink("Renuntare", "Show", "Service", new { id = Model.Service.Id }, new { @class = "btn btn-danger" });</span>
+	}
+}
+

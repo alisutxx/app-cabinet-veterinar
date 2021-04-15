@@ -1,0 +1,24 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.PetModel
+
+<h2>@Model.Name</h2>
+
+
+@*if(loggedUser.IsAdmin || loggedUser.IsStaff)
+		{
+		<div>
+			Detinator: LINK CATRE PROFIL @pet.OwnerName
+		</div>
+	}*@
+<div>
+	@Model.Species
+</div>
+<div>
+	@Model.BirthDate
+</div>
+<div>
+	@Model.Breed
+</div>
+
+@Html.ActionLink("Inapoi la lista", "Index", "Pet", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Editeaza", "AddEdit", "Pet", new { id = Model.Id }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Sterge", "Delete", "Pet", new { id = Model.Id }, new { @class = "btn btn-danger" })

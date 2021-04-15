@@ -1,0 +1,47 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ViewModels.AppointmentViewModel
+
+<h2>
+	Adaugare programare
+</h2>
+
+@using (Html.BeginForm("SaveAddForClient", "Appointment"))
+{
+	<div class="form-group">
+		@Html.LabelFor(m => m.Appointment.Date)
+		@Html.TextBoxFor(m => m.Appointment.Date, "{0:d MMM yyyy}", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Appointment.Date)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Appointment.PetId)
+		@Html.DropDownListFor(m => m.Appointment.PetId, new SelectList(Model.Pets, "Id", "Name"), "Alege animalul", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Appointment.PetId)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Appointment.MedicId)
+		@Html.DropDownListFor(m => m.Appointment.MedicId, new SelectList(Model.Medics, "Id", "FullName"), "Alege medicul", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Appointment.MedicId)
+	</div>
+	<div>
+		Nume serviciu: @Model.Appointment.ServiceName
+		<br />
+		Pret: @Model.Appointment.EstimativePrice
+	</div>
+
+
+	@Html.HiddenFor(m => m.Appointment.EstimativePrice)
+	@Html.HiddenFor(m => m.Appointment.ServiceId)
+	@Html.HiddenFor(m => m.Appointment.Id)
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-primary">Salvare</button>
+
+	if (Model.Appointment.Id == 0)
+	{
+		<span>@Html.ActionLink("Renuntare", "IndexForClient", "Appointment", null, new { @class = "btn btn-danger" });</span>
+	}
+	else
+	{
+		<span>@Html.ActionLink("Renuntare", "Show", "Appointment", new { id = Model.Appointment.Id }, new { @class = "btn btn-danger" });</span>
+	}
+}

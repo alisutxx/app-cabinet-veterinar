@@ -1,0 +1,24 @@
+﻿@model ServiceModel
+
+@using Aplicatie_web_cabinet_veterinar.Models.ApplicationModels
+
+<h2>@Model.Name</h2>
+
+
+<div>
+	Descriere: @Model.Description
+</div>
+<div>
+	Pret: @Model.Price
+</div>
+<div>
+	Categorie: @Model.CategoryName
+</div>
+
+@Html.ActionLink("Inapoi la lista", "Index", "Service", null, new { @class = "btn btn-primary" })
+@if (ApplicationHelper.IsAdmin)
+{
+
+	@Html.ActionLink("Editeaza", "AddEdit", "Service", new { id = Model.Id }, new { @class = "btn btn-primary" })
+	@Html.ActionLink("Sterge", "Delete", "Service", new { id = Model.Id }, new { @class = "btn btn-danger" })
+}

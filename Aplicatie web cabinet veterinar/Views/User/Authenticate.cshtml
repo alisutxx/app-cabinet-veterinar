@@ -1,0 +1,23 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.UserAuthenticationModel
+
+<h2>Autentificare</h2>
+
+@using (Html.BeginForm("Authenticate", "User"))
+{
+	if (ViewBag.Message != null)
+	{
+		<div class="field-validation-error">@ViewBag.Message</div>
+	}
+	<div class="form-group">
+		@Html.LabelFor(m => m.Email)
+		@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Email)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.Password)
+		@Html.TextBoxFor(m => m.Password, new { @class = "form-control ", @type = "password" })
+		@Html.ValidationMessageFor(m => m.Password)
+	</div>
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-primary">Save</button>
+}

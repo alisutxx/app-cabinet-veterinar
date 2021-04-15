@@ -1,0 +1,46 @@
+﻿@model List<ServiceModel>
+@using Aplicatie_web_cabinet_veterinar.Models.ApplicationModels
+
+
+@if (Model.Count == 0)
+{
+	<h2>
+		Nu exista servicii pentru aceasta categorie.
+	</h2>
+}
+else
+{
+	<h2>
+		Servicii:
+	</h2>
+}
+
+@Html.ActionLink("Inapoi la categorii", "Index", "Service", null, new { @class = "btn btn-primary" });
+<br />
+<br />
+<br />
+@foreach (var service in Model)
+{
+	<div>
+		Nume: @service.Name
+	</div>
+	<br />
+
+	<div>
+		Descriere: @service.Description
+	</div>
+	<br />
+
+	<div>
+		Pret: @service.Price  RON
+	</div>
+	if (ApplicationHelper.IsUtilizator)
+	{
+		<span>
+			@Html.ActionLink("Creaza programare", "AddForClient", "Appointment", new { serviceId = service.Id, price = service.Price, serviceName = service.Name }, new { @class = "btn btn-primary" })
+		</span>
+	}
+	<br />
+	<br />
+}
+

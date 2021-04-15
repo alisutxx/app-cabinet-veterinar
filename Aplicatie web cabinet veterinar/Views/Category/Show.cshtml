@@ -1,0 +1,7 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.CategoryModel
+
+<h2>Categorie pentru programare</h2>
+
+@Html.ActionLink(Model.Name, "AddEdit", "Category", new { id = Model.Id }, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Inapoi la lista", "Index", "Category", new { id = Model.Id }, new { @class = "btn btn-primary" })

@@ -1,0 +1,27 @@
+﻿@model List<Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.MedicModel>
+
+@using Aplicatie_web_cabinet_veterinar.Models.ApplicationModels
+
+@if (ApplicationHelper.IsAdmin)
+{
+	@Html.ActionLink("Adauga angajat", "RegisterNewEmployee", "User", null, new { @class = "btn btn-primary" })
+}
+<h2>Lista medicilor</h2>
+<br />
+<br />
+
+	@foreach (var medic in Model)
+	{
+		<div>
+			Nume complet: @medic.FullName
+		</div>
+
+		<div>
+			Specializare: @medic.Specialization
+		</div>
+		<br />
+		<br />
+	}
+
+
+

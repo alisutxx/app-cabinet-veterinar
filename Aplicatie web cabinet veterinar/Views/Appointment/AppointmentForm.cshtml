@@ -1,0 +1,42 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ViewModels.AppointmentViewModel
+
+<h2>
+	@if (Model.Appointment.Id == 0)
+	{<span>Adaugare</span>}
+	else
+	{ <span>Editare</span>} serviciu pentru programari
+</h2>
+
+@using (Html.BeginForm("Save", "Appointment"))
+{
+	<div class="form-group">
+		@Html.LabelFor(m => m.Appointment.Date)
+		@Html.TextBoxFor(m => m.Appointment.Date, "{0:d MMM yyyy}", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Appointment.Date)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Appointment.PetId)
+		@Html.DropDownListFor(m => m.Appointment.PetId, new SelectList(Model.Pets, "Id", "Name"), "Alege animalul", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Appointment.PetId)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Appointment.MedicId)
+		@Html.DropDownListFor(m => m.Appointment.MedicId, new SelectList(Model.Medics, "Id", "FullName"), "Alege medicul", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Appointment.MedicId)
+	</div>
+
+	@Html.HiddenFor(m => m.Appointment.Id)
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-primary">Salvare</button>
+
+	if (Model.Appointment.Id == 0)
+	{
+		<span>@Html.ActionLink("Renuntare", "Index", "Appointment", null, new { @class = "btn btn-danger" });</span>
+	}
+	else
+	{
+		<span>@Html.ActionLink("Renuntare", "Show", "Appointment", new { id = Model.Appointment.Id }, new { @class = "btn btn-danger" });</span>
+	}
+}

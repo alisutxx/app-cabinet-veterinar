@@ -1,0 +1,18 @@
+﻿@model List<Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.CategoryModel>
+
+
+
+<h2>Cateogrii pentru programari</h2>
+
+@Html.ActionLink("Adauga categorie", "AddEdit", "Category", null, new { @class = "btn btn-primary" })
+@foreach (var category in Model)
+{
+	<div>
+		<div>
+			Nume: @Html.ActionLink(category.Name, "Show", "Category", new { id = category.Id }, null)
+		</div>
+	</div>
+	//Poate adaugam aici butoane de edit delete
+	<br />
+	<br />
+}

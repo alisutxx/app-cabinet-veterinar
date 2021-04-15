@@ -1,0 +1,62 @@
+﻿@model List<AppointmentModel>
+
+@using Aplicatie_web_cabinet_veterinar.Models.ApplicationModels
+
+<h2>Programarile mele</h2>
+
+
+@if (Model.Count == 0)
+{
+	<div>Nu aveti nicio programare creata.</div>
+}
+
+@if (Model.Any(app => app.Date > DateTime.Now && app.IsConfirmed == true))
+{
+	<h3>Progamarile viitoare:</h3>
+
+	<br />
+	<br />
+	foreach (var appointment in Model.Where(app => app.IsConfirmed == true && app.Date > DateTime.Now))
+	{
+		<div>
+			@Html.ActionLink($"Vizualizeaza programarea pentru {appointment.ServiceName} de pe data {appointment.Date}.", "Show", "Appointment", new { id = appointment.Id }, new { @class = "btn btn-primary" })
+		</div>
+		<br />
+	}
+}
+
+@if (Model.Any(app => app.Date > DateTime.Now && app.IsConfirmed == false))
+{
+	<h3>Progamarile neconfirmate:</h3>
+
+	<br />
+	<br />
+	foreach (var appointment in Model.Where(app => app.IsConfirmed == false && app.Date > DateTime.Now))
+	{
+		<div>
+			@Html.ActionLink($"Vizualizeaza programarea pentru {appointment.ServiceName} de pe data {appointment.Date}.", "Show", "Appointment", new { id = appointment.Id }, new { @class = "btn btn-primary" })
+			@if (ApplicationHelper.IsAngajat)
+			{
+				<span>
+					@Html.ActionLink("  Confirma programarea", "ConfirmAppointment", "Appointment", new { id = appointment.Id }, new { @class = "btn btn-primary" })
+				</span>
+			}
+		</div>
+		<br />
+	}
+}
+
+@if (Model.Any(app => app.Date < DateTime.Now && app.IsConfirmed == true))
+{
+	<h3>Istoric programari:</h3>
+
+	<br />
+	<br />
+	foreach (var appointment in Model.Where(app => app.IsConfirmed == true && app.Date < DateTime.Now))
+	{
+		<div>
+			@Html.ActionLink($"Vizualizeaza programarea pentru {appointment.ServiceName} de pe data {appointment.Date}.", "Show", "Appointment", new { id = appointment.Id }, new { @class = "btn btn-primary" })
+		</div>
+		<br />
+	}
+}

@@ -1,0 +1,42 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.UserSignUpModel
+
+<h2>Inregistrare</h2>
+
+@using (Html.BeginForm("SignUp", "User"))
+{
+	<div class="form-group">
+		@Html.LabelFor(m => m.FirstName)
+		@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.FirstName)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.LastName)
+		@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.LastName)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.Email)
+		@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Email)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.PhoneNumber)
+		@Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.PhoneNumber)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.Password)
+		@Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+		@Html.ValidationMessageFor(m => m.Password)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.ConfirmPassword)
+		@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
+		@Html.ValidationMessageFor(m => m.ConfirmPassword)
+	</div>
+	@Html.HiddenFor(m => m.Id)
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-primary">Inregistreaza-te</button>
+}
+
+

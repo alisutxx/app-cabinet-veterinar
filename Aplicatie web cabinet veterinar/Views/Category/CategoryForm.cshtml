@@ -1,0 +1,31 @@
+﻿@model Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.CategoryModel
+
+<h2>
+	@if (Model.Id == 0)
+	{<span>Adaugare</span>}
+	else
+	{ <span>Editare</span>} categorie pentru programari
+</h2>
+
+@using (Html.BeginForm("Save", "Category"))
+{
+	<div class="form-group">
+		@Html.LabelFor(m => m.Name)
+		@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Name)
+	</div>
+
+	@Html.HiddenFor(m => m.Id)
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-primary">Salvare</button>
+
+
+	if (Model.Id == 0)
+	{
+		<span>@Html.ActionLink("Renuntare", "Index", "Category", null, new { @class = "btn btn-danger" });</span>
+	}
+	else
+	{
+		<span>@Html.ActionLink("Renuntare", "Show", "Category", new { id = Model.Id }, new { @class = "btn btn-danger" });</span>
+	}
+}

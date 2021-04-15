@@ -1,0 +1,30 @@
+﻿@model List<Aplicatie_web_cabinet_veterinar.Models.ApplicationModels.PetModel>
+
+
+
+<h2>Animale de companie</h2>
+<br />
+@Html.ActionLink("Adauga animal", "AddEdit", "Pet", null, new { @class="btn btn-primary"})
+<br />
+<br />
+@foreach (var pet in Model)
+{
+	<div>
+		<div>
+			Nume: @Html.ActionLink(pet.Name, "Show", "Pet", new { id = pet.Id }, null)
+		</div>
+		@*if(loggedUser.IsAdmin || loggedUser.IsStaff)
+			{
+			<div>
+				Detinator: LINK CATRE PROFIL @pet.OwnerName
+			</div>
+			}*@
+
+		<div>
+			Tip animal: @pet.Species
+		</div>
+	</div>
+	<br />
+	<br />
+}
+

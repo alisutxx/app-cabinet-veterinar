@@ -1,0 +1,19 @@
+﻿@model List<CategoryModel>
+
+@using Aplicatie_web_cabinet_veterinar.Models.ApplicationModels
+
+<h2>Lista categoriilor servicilor oferite</h2>
+@if(ApplicationHelper.IsAdmin)
+{
+
+	@Html.ActionLink("Adauga un serviciu", "AddEdit", "Service", null, new { @class = "btn btn-primary" })
+}
+
+@foreach (var category in Model)
+{
+	<div>
+		Nume: @Html.ActionLink(category.Name, "ShowServicesByCategoryId", "Service", new { id = category.Id }, null)
+	</div>
+	<br />
+	<br />
+}
